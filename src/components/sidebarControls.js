@@ -52,29 +52,33 @@ export class SidebarControls {
   }
 
   bindSidebarToggles() {
+    const toggle = () => {
+      sound.playClick();
+      const isOpen = this.sidebar.classList.toggle('open');
+      document.body.classList.toggle('sidebar-open', isOpen);
+    };
+
     if (this.toggleBtn) {
-      this.toggleBtn.addEventListener('click', () => {
-        sound.playClick();
-        this.sidebar.classList.toggle('open');
-      });
+      this.toggleBtn.addEventListener('click', toggle);
     }
 
     if (this.closeBtn) {
       this.closeBtn.addEventListener('click', () => {
         sound.playClick();
         this.sidebar.classList.remove('open');
+        document.body.classList.remove('sidebar-open');
       });
     }
 
-    // Shortcut: Ctrl+B or Ctrl+C
+    // Shortcut: Ctrl+B or Cmd+B
     window.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'b' || e.key.toLowerCase() === 'c')) {
+      if ((e.ctrlKey || e.metaKey) && (e.code === 'KeyB' || e.key.toLowerCase() === 'b')) {
         e.preventDefault();
-        sound.playClick();
-        this.sidebar.classList.toggle('open');
+        toggle();
       }
       if (e.key === 'Escape' && this.sidebar.classList.contains('open')) {
         this.sidebar.classList.remove('open');
+        document.body.classList.remove('sidebar-open');
       }
     });
   }

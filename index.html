@@ -481,96 +481,113 @@
     </section>
 
     <!-- =========================================================================
-         SECTION 03: ARCHIVE INDEX // 3D 工程档案卡匣库 (深度复刻 作品简介参考图.png)
+         SECTION 03: WELKIN 玻璃档案库 // 广义相对论克尔黑洞工程档案 (1:1 复刻 Welkin 艺术设计)
          ========================================================================= -->
     <section class="section-shelf-fullscreen page-section" id="projects" data-index="3" data-label="作品">
-      <!-- 3D Slotted Archive Cassette Stage (Exact match to 作品简介参考图.png) -->
-      <div class="archive-shelf-stage">
+      <div class="welkin-showcase-container">
         
-        <!-- Top HUD Status Bar (Exact reproduction of 作品简介参考图.png) -->
-        <div class="shelf-top-hud">
-          <div class="rhine-brand-line">
-            <span class="rhine-bold">RHINE LAB</span>
-            <div class="rhine-sub-group">
-              <span class="rhine-sub">SYNTHESIZE INFORMATION</span>
-              <span class="rhine-sub">ANALYSIS <b>OS</b></span>
-            </div>
-          </div>
-          <div class="shelf-meta-right">
-            <span class="search-tag mono">🔍 ARCHIVE INDEX [ / ]</span>
-            <span class="saved-tag mono">+ SAVED 00</span>
-            <span class="shelf-clock-icon">🕒</span>
+        <!-- Left Editorial Slogan (Exact reproduction of 参考图 1, 2, 3) -->
+        <div class="welkin-side-editorial">
+          <div class="welkin-brand-mark mono">WELKIN // ARCHIVE</div>
+          <h2 class="welkin-slogan-title" id="welkin-slogan-title">翻一翻。</h2>
+          <p class="welkin-slogan-desc" id="welkin-slogan-desc">
+            档案会跟着动。<br>
+            光影也是。
+          </p>
+          <div class="welkin-editorial-hint mono">
+            <span class="hint-dot"></span> 滚轮滑动 · 纯白磨砂玻璃层叠光影
           </div>
         </div>
 
-        <!-- The Three.js 3D Viewport: Rows of slotted white archive cassettes in perspective -->
-        <div id="archive-3d-shelf" class="archive-3d-shelf-viewport"></div>
-
-        <!-- Interactive Center HUD Overlay connected to the Lifted Box (Exact reproduction of 作品简介参考图.png) -->
-        <div class="shelf-floating-hud" id="shelf-floating-hud">
-          <div class="hud-center-marker">
-            <div class="hud-left-meta mono">
-              <span class="hud-db-tag" id="shelf-hud-category">INTERNAL DATABASE / 工程研究</span>
+        <!-- Right/Center Modern Presentation Stage Window Frame -->
+        <div class="welkin-stage-frame">
+          
+          <!-- Top Window Header Bar -->
+          <div class="welkin-frame-topbar">
+            <div class="welkin-window-dots">
+              <span class="w-dot red"></span>
+              <span class="w-dot yellow"></span>
+              <span class="w-dot green"></span>
             </div>
-            <div class="hud-rule-line left"></div>
-            <div class="hud-info-badge">
-              <h3 class="hud-file-num mono" id="shelf-hud-filenum">FILE NUMBER: X-001</h3>
-              <span class="hud-sub-label">结构与边界</span>
-              <button class="hud-access-btn" id="shelf-access-file-btn" title="打开此档案的详细信息 (ENTER)">
-                <span>ACCESS FILE</span>
-                <span class="arrow">→</span>
-              </button>
-            </div>
-            <div class="hud-rule-line right"></div>
-            <div class="hud-right-meta mono">
-              <span class="hud-ref-label">REFERENCE AREA</span>
-            </div>
+            <div class="welkin-window-title mono">WELKIN / THEME PREVIEW · GARGANTUA ARCHIVE</div>
+            <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="welkin-window-ext" title="在新标签页查看 GARGANTUA 仓库">↗</a>
           </div>
-        </div>
 
-        <!-- Bottom Navigation & Controls (Matching 作品简介参考图.png) -->
-        <div class="shelf-bottom-bar">
-          <div class="shelf-left-counter">
-            <span class="sub-txt mono">ARCHIVE / SELECT</span>
-            <div class="num-row">
-              <b class="cur-num mono" id="shelf-current-index">01</b>
-              <span class="slash mono">/</span>
-              <span class="tot-num mono">08</span>
+          <!-- Canvas Inner Top Navigation -->
+          <div class="welkin-canvas-header">
+            <div class="welkin-inner-brand">
+              <span class="brand-text">WELKIN</span>
             </div>
-            <div class="auth-dot-stamp mono">
-              <span class="stamp-square">■</span> SESSION AUTHORIZED
+            <div class="welkin-inner-nav">
+              <a href="#top" class="w-nav-link active">首页</a>
+              <button class="w-nav-link" id="w-nav-all-modules">所有模块</button>
+              <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="w-nav-link">源码 ↗</a>
             </div>
           </div>
 
-          <!-- File Row Arrows ↑ ↓ -->
-          <div class="shelf-row-controls">
-            <button class="step-btn" id="shelf-prev-file" title="上一个档案 (键盘 ↑)">↑</button>
-            <div class="notch-indicators mono">
-              <span>|</span><span>|</span><span>|</span><span>|</span><span>|</span>
+          <!-- The Three.js 3D Viewport: Stepped Translucent Frosted Glass Cassettes -->
+          <div id="archive-3d-shelf" class="archive-3d-shelf-viewport"></div>
+
+          <!-- Floating Hover HUD (Follows the lifted cassette in 3D: 客体细节 / 点一下，慢慢展开 / 打开档案 ↗) -->
+          <div class="welkin-floating-hud" id="welkin-floating-hud">
+            <div class="hud-meta-label" id="welkin-hud-meta">客体细节 / 2026.01.12</div>
+            <div class="hud-callout-title" id="welkin-hud-title">点一下，慢慢展开。</div>
+            <button class="hud-open-btn" id="welkin-hud-open-btn" title="展开档案详细内容">
+              <span>打开档案</span>
+              <span class="arrow">↗</span>
+            </button>
+          </div>
+
+          <!-- Bottom HUD Bar -->
+          <div class="welkin-bottom-hud">
+            <!-- Bottom Left Counter & Switcher -->
+            <div class="welkin-counter-box">
+              <div class="counter-row">
+                <span class="cur mono" id="welkin-cur-index">01</span>
+                <span class="slash mono">/</span>
+                <span class="tot mono" id="welkin-tot-index">07</span>
+                <div class="welkin-arrow-btns">
+                  <button class="w-arrow-btn" id="welkin-prev-btn" title="上一个档案 (←)">←</button>
+                  <button class="w-arrow-btn" id="welkin-next-btn" title="下一个档案 (→)">→</button>
+                </div>
+              </div>
+              <span class="sub-label mono">滚轮切换</span>
             </div>
-            <button class="step-btn" id="shelf-next-file" title="下一个档案 (键盘 ↓)">↓</button>
-          </div>
 
-          <!-- Column Selector ← → -->
-          <div class="shelf-col-controls">
-            <button class="step-col-btn" id="shelf-prev-col" title="上一列 (键盘 ←)">←</button>
-            <div class="col-text-box">
-              <span class="col-num mono" id="shelf-current-column">COLUMN 03 / 05</span>
-              <span class="col-name" id="shelf-current-column-name">工程研究</span>
+            <!-- Bottom Center Indicator -->
+            <div class="welkin-center-indicator" id="welkin-center-scroll-hint">
+              <span class="arrow">↓</span>
+              <span class="text">所有模块</span>
             </div>
-            <button class="step-col-btn" id="shelf-next-col" title="下一列 (键盘 →)">→</button>
           </div>
 
-          <div class="shelf-right-credits">
-            <span class="power-tag mono">POWERED BY <b>RHINE LAB</b></span>
-            <span class="operator-tag mono">JOYCE MOORE / 09:41:00 / REINITIALIZE ↗</span>
-          </div>
-        </div>
+          <!-- Expanded Detail View (Translucent Frosted Card Overlay - 点一下，档案慢慢打开) -->
+          <div class="welkin-detail-card" id="welkin-detail-card" aria-hidden="true">
+            <button class="welkin-back-btn" id="welkin-back-btn" title="收起并返回玻璃档案层叠 (ESC)">
+              ← 返回档案
+            </button>
 
-        <!-- Hint Prompt Subtitle -->
-        <div class="shelf-hint-sub mono">
-          <span class="hot-red">← → 切换列 / ↑ ↓ 前后档案 / ENTER 读取 / 拖拽旋转 3D 视界</span>
-          <span class="shelf-cycle-pill">GARGANTUA 相对论引擎 · 7 项核心架构模块连续切换</span>
+            <div class="welkin-detail-sheet">
+              <div class="sheet-meta mono" id="welkin-sheet-meta">关于 GARGANTUA / 2026.01.12</div>
+              <h3 class="sheet-title" id="welkin-sheet-title">GARGANTUA 相对论克尔黑洞引擎。</h3>
+              <p class="sheet-desc" id="welkin-sheet-desc">
+                从零实现的广义相对论黑洞实时物理可视化引擎：引力透镜光线偏折、吸积盘极端相对论多普勒频移、光子环与事件视界。单文件 123 KB 交付，零外部依赖，直接在纯 WebGL 环境下计算测地线光线弯曲。
+              </p>
+              <div class="sheet-metrics-row">
+                <span class="metric-pill mono" id="welkin-sheet-metric">单文件 123 KB · 零外部依赖 · 60 FPS</span>
+                <span class="metric-pill mono" id="welkin-sheet-category">广义相对论 / 实时物理引擎</span>
+              </div>
+              <div class="sheet-actions">
+                <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="sheet-action-link primary" id="welkin-sheet-repo-link">
+                  阅读全文 / 调阅代码 ↗
+                </a>
+                <button class="sheet-action-link ghost" id="welkin-sheet-next-link">
+                  下一模块 →
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

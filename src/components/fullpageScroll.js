@@ -71,32 +71,34 @@ export class FullpageScroll {
     }
 
     const labels = [
-      '00 // HERO · 总览',
-      '01 // ARCHIVE · 档案',
-      '02 // ARCHITECTURE · 架构',
-      '03 // CASSETTE · 3D 作品',
-      '04 // FEEDBACK · 留言',
-      '05 // CONTACT · 通联'
+      '00 // HERO · 终端总览',
+      '01 // ARCHIVE · 相对论档案',
+      '02 // ARCHITECTURE · 核心架构',
+      '03 // CASSETTE · 3D 玻璃档案盒',
+      '04 // FEEDBACK · 留言终端',
+      '05 // CONTACT · 通联协议'
     ];
 
     container.innerHTML = `
-      <div class="fp-rail-line">
-        <div class="fp-active-glow" id="fp-active-glow"></div>
+      <div class="fp-rail-wrapper">
+        <div class="fp-rail-line">
+          <div class="fp-active-glow" id="fp-active-glow"></div>
+        </div>
+        <div class="fp-dots-list">
+          ${this.sections.map((sec, i) => {
+            const numStr = String(i).padStart(2, '0');
+            const label = labels[i] || `${numStr} // ${sec.getAttribute('data-label') || 'SECTION'}`;
+            return `
+              <button class="fp-dot-item" data-index="${i}" title="${label}" aria-label="${label}">
+                <span class="fp-dot-num mono">${numStr}</span>
+                <span class="fp-dot-node"><span class="fp-node-core"></span></span>
+                <span class="fp-tooltip mono">${label}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
       </div>
-      <div class="fp-dots-list">
-        ${this.sections.map((sec, i) => {
-          const numStr = String(i).padStart(2, '0');
-          const label = labels[i] || `${numStr} // ${sec.getAttribute('data-label') || 'SECTION'}`;
-          return `
-            <button class="fp-dot-item" data-index="${i}" title="${label}" aria-label="${label}">
-              <span class="fp-dot-num mono">${numStr}</span>
-              <span class="fp-dot-node"></span>
-              <span class="fp-tooltip mono">${label}</span>
-            </button>
-          `;
-        }).join('')}
-      </div>
-      <div class="fp-counter-hud mono">
+      <div class="fp-counter-hud mono" title="当前板块 / 总板块数">
         <span class="cur" id="fp-cur-num">00</span>
         <span class="slash">/</span>
         <span class="tot">0${this.sections.length - 1}</span>
@@ -342,9 +344,15 @@ export class FullpageScroll {
       }
 
       const activeGlow = document.getElementById('fp-active-glow');
-      if (activeGlow && dots.length > 0) {
-        const percent = (index / (dots.length - 1)) * 100;
-        activeGlow.style.top = `${percent}%`;
+      const dotsList = this.paginationEl.querySelector('.fp-dots-list');
+      if (activeGlow && dots[index] && dotsList) {
+        const activeNode = dots[index].querySelector('.fp-dot-node');
+        if (activeNode) {
+          const listRect = dotsList.getBoundingClientRect();
+          const nodeRect = activeNode.getBoundingClientRect();
+          const targetTop = (nodeRect.top - listRect.top) + (nodeRect.height / 2) - 8;
+          activeGlow.style.top = `${targetTop}px`;
+        }
       }
     }
 
