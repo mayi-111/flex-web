@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mayi-111 · TERMINAL // GARGANTUA 广义相对论黑洞视界</title>
+  <meta name="description" content="mayi-111，独立图形学与前端开发者。基于纯白3D与工业美学构建的个人主页，主打 GARGANTUA 相对论克尔黑洞实时物理渲染引擎。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,10 90,30 90,70 50,90 10,70 10,30' fill='%23e53935'/><circle cx='50' cy='50' r='18' fill='%23ffffff'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=JetBrains+Mono:wght@300;400;600;800&family=Noto+Sans+SC:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">跳到主要内容</a>
+
+  <!-- Dynamic Wave Background Canvas (波纹效果背景参考图) -->
+  <canvas id="wave-canvas" aria-hidden="true"></canvas>
+
+  <!-- Pure White 3D Parametric Slat Ribbon Sculpture Viewport (个人名片参考图 纯白3D背景) -->
+  <div id="sculpture-container" aria-hidden="true"></div>
+
+  <!-- Top System Header Bar -->
+  <header class="sys-header">
+    <div class="header-left">
+      <a href="#top" class="brand-link" title="返回主界面">
+        <span class="brand-rhine-icon">⬡</span>
+        <span class="brand-title">RHINE · TERMINAL</span>
+      </a>
+
+      <!-- Procedural Audio Switch with Live Equalizer Visualizer -->
+      <button id="audio-toggle-btn" class="sys-audio-btn" title="切换程序化背景音与交互音效 (Ctrl+M)">
+        <div class="eq-bars">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+          <span class="bar bar-4"></span>
+        </div>
+        <span class="audio-label">SOUND: <b id="audio-state-text">ON</b></span>
+      </button>
+    </div>
+
+    <!-- Center Navigation Links -->
+    <nav class="header-nav" aria-label="页面快捷导航">
+      <a href="#top" class="nav-item">总览</a>
+      <a href="#archive" class="nav-item">档案</a>
+      <a href="#skills" class="nav-item">架构</a>
+      <a href="#projects" class="nav-item">作品</a>
+      <a href="#feedback" class="nav-item">留言</a>
+      <a href="#contact" class="nav-item">通联</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="sys-clock mono" id="topbar-clock">00:00:00</span>
+
+      <!-- 3D Sculpture & Wave Controls Toggle -->
+      <button id="sidebar-toggle-btn" class="chamfer-btn tech-ghost-btn" title="打开3D雕塑与视觉控制台 (Ctrl+B)">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text">3D 控制台</span>
+      </button>
+
+      <!-- Neumorphic Day/Night Switch (Exact match to 拟态开关1.png & 2.png) -->
+      <div class="neumorphic-switch-wrapper">
+        <span class="switch-label label-off active">OFF</span>
+        <div class="neumorphic-switch" id="theme-switch" role="switch" aria-checked="false" tabindex="0" title="切换白天/黑夜模式">
+          <div class="switch-track">
+            <div class="track-fill"></div>
+            <div class="recessed-ring"></div>
+            <div class="switch-knob">
+              <div class="knob-face knurled-texture"></div>
+            </div>
+          </div>
+        </div>
+        <span class="switch-label label-on">ON</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Multi-Section Content Shell -->
+  <main class="app-main" id="main">
+
+    <!-- =========================================================================
+         SECTION 00: HERO (终端总览 // TERMINAL OVERVIEW)
+         ========================================================================= -->
+    <section class="section-hero page-section" id="top" data-index="0" data-label="总览">
+      <div class="hero-inner-container">
+        
+        <div class="hero-meta-bar">
+          <span class="meta-line"></span>
+          <span class="meta-tag">FILE X-001 / RELATIVISTIC ASTROPHYSICS & GRAPHICS ENGINE</span>
+          <span class="meta-live"><span class="red-dot"></span> LIVE // 2026</span>
+        </div>
+
+        <h1 class="hero-giant-title">
+          BUILD<br>
+          WITH<span class="red-period">.</span><br>
+          INTENT
+        </h1>
+
+        <div class="hero-operator-info">
+          <h2 class="op-name">mayi-111</h2>
+          <span class="op-slash">/</span>
+          <span class="op-title">独立开发者 · 图形学与前端工程师</span>
+          <span class="op-slash">/</span>
+          <span class="op-loc">CN</span>
+        </div>
+
+        <p class="hero-tagline-lede">
+          专注广义相对论天体物理仿真、WebGL / GLSL 实时着色器与轻量极致交付。代表作 <b>GARGANTUA 相对论克尔黑洞实时引擎</b>，
+          以单文件 123 KB 零依赖在纯浏览器中解算弯曲时空测地线光线偏折、吸积盘多普勒集束与光子球。
+        </p>
+
+        <!-- Direct Social & Project Badges Row -->
+        <div class="hero-quick-contacts">
+          <div class="qc-item">
+            <span class="qc-key">GITHUB</span>
+            <span class="qc-val"><a href="https://github.com/mayi-111" target="_blank" rel="noopener noreferrer">@mayi-111</a></span>
+          </div>
+          <div class="qc-item">
+            <span class="qc-key">REPO</span>
+            <span class="qc-val"><a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer">GARGANTUA Demo</a></span>
+          </div>
+          <div class="qc-item">
+            <span class="qc-key">ENGINE</span>
+            <span class="qc-val"><span class="mono">WebGL 2.0 / GLSL</span></span>
+          </div>
+          <div class="qc-item">
+            <span class="qc-key">DELIVERY</span>
+            <span class="qc-val"><span class="mono red-hot">123 KB · 零依赖</span></span>
+          </div>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="hero-actions-row">
+          <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">调阅 GARGANTUA 仓库 ↗</a>
+          <a href="#projects" class="btn btn-ghost">3D 档案卡匣库 →</a>
+        </div>
+
+        <!-- Scroll Down Hint -->
+        <a href="#archive" class="scroll-guide-hint">
+          <span class="guide-bar"></span>
+          <span>SCROLL / 向下调阅档案</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 01: ARCHIVE & GLASS CARD (个人档案与静态玻璃名片 // SYNTHESIZE INFORMATION)
+         ========================================================================= -->
+    <section class="content-section page-section" id="archive" data-index="1" data-label="档案">
+      <div class="sec-header-block">
+        <span class="sec-index">01</span>
+        <div class="sec-title-group">
+          <h2 class="sec-chinese-title">档案</h2>
+          <span class="sec-english-title">ARCHIVE // SYNTHESIZE INFORMATION ANALYSIS OS</span>
+        </div>
+        <div class="sec-decor-line"></div>
+      </div>
+
+      <div class="archive-split-grid">
+        
+        <!-- Left Column: Biography & Specs -->
+        <div class="archive-bio-col">
+          <div class="bio-paragraphs">
+            <p class="bio-p lead-p">
+              独立图形学与前端开发者，热衷于在纯浏览器环境下挑战物理仿真与图形学极限。
+            </p>
+            <p class="bio-p">
+              开源代表作 <b>GARGANTUA 相对论黑洞引擎</b>：从零实现广义相对论克尔度规（Kerr Metric）下的引力透镜光线弯曲、吸积盘多普勒集束（Doppler Beaming）与爱因斯坦光子球。全引擎仅需 <b>123 KB 单文件</b>，零外部网络或构建依赖，在主流浏览器中稳定以 60 FPS 实时渲染。
+            </p>
+            <p class="bio-p">
+              崇尚极简工业美学、低开销物理动效与可访问性，将前沿天体物理计算以兼具严谨数理与视觉张力的方式呈现给每位访客。
+            </p>
+          </div>
+
+          <!-- Professional Specs Table -->
+          <div class="specs-table-card">
+            <div class="spec-cell">
+              <span class="sc-label">ROLE</span>
+              <span class="sc-val"><b>独立开发者</b> · 图形学与前端工程师</span>
+            </div>
+            <div class="spec-cell">
+              <span class="sc-label">BASE</span>
+              <span class="sc-val">CN · 开放开源技术交流</span>
+            </div>
+            <div class="spec-cell">
+              <span class="sc-label">FOCUS</span>
+              <span class="sc-val">WebGL 2.0 / GLSL · 广义相对论黑洞仿真 · 极简轻量工程</span>
+            </div>
+            <div class="spec-cell">
+              <span class="sc-label">STATUS</span>
+              <span class="sc-val"><span class="green-dot">●</span> GARGANTUA 开源项目活跃维护中</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Frosted Glass Archive Card (Matching 个人名片参考图.png) -->
+        <div class="archive-card-col">
+          <div class="glass-card" id="glass-profile-card">
+            
+            <div class="card-header">
+              <div class="header-tag">
+                <span class="dot-indicator"></span>
+                <span class="section-profile-title">• SECTION PROFILE •</span>
+              </div>
+              <div class="rhine-llc-badge">
+                <span class="rhine-icon">⬡</span>
+                <span>RHINE LAB.LLC.</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <!-- Classified Avatar with Scanlines -->
+              <div class="avatar-column">
+                <div class="avatar-frame">
+                  <div class="avatar-silhouette">
+                    <div class="scanline-beam"></div>
+                    <svg viewBox="0 0 100 120" class="silhouette-svg">
+                      <defs>
+                        <pattern id="dotMatrix" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+                          <circle cx="3" cy="3" r="1.2" fill="currentColor" opacity="0.4"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100" height="120" fill="url(#dotMatrix)" />
+                      <path d="M50 20 C60 20 68 28 68 38 C68 48 60 56 50 56 C40 56 32 48 32 38 C32 28 40 20 50 20 Z" fill="currentColor" opacity="0.85"/>
+                      <path d="M20 105 C20 80 32 68 50 68 C68 68 80 80 80 105 Z" fill="currentColor" opacity="0.85"/>
+                    </svg>
+                    <div class="classified-stamp">
+                      <span>PHOTO CLASSIFIED</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="status-led-group">
+                  <div class="led-item active" title="CAPS"><span class="led-light"></span><span class="led-text">CAPS</span></div>
+                  <div class="led-item active" title="MEM"><span class="led-light"></span><span class="led-text">MEM</span></div>
+                  <div class="led-item active" title="KEY"><span class="led-light"></span><span class="led-text">KEY</span></div>
+                </div>
+              </div>
+
+              <!-- Operator Info -->
+              <div class="profile-details">
+                <div class="profile-meta-row">
+                  <span class="operator-badge">OPERATOR</span>
+                  <span class="session-badge">SESSION LOCKED</span>
+                </div>
+                
+                <div class="operator-name-box">
+                  <h2 class="operator-name" id="operator-display-name">MAYI-111</h2>
+                  <button class="name-edit-hint" title="自定义个人代号 / 昵称" id="btn-custom-name">✎</button>
+                </div>
+
+                <div class="info-tag-box">
+                  <span class="tag-accent">NIRI</span>
+                  <span class="tag-desc">PERSONAL INFORMATION LOADED • LOCKED 00:00:06</span>
+                </div>
+
+                <div class="profile-spec-grid">
+                  <div class="spec-row">
+                    <span class="spec-label">HOST</span>
+                    <span class="spec-value">GEEK / GRAPHICS DEV</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SESSION</span>
+                    <span class="spec-value">NIRI-01 SEALED</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOCKED AT</span>
+                    <span class="spec-value" id="live-locked-time">07:52:26</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">KEYMAP</span>
+                    <span class="spec-value">US • UTF-8</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Authorization Passphrase Input & Hard-cut Lockdown Trigger -->
+            <div class="card-footer-auth">
+              <div class="auth-title-bar">
+                <span class="auth-bullet">―</span>
+                <span class="auth-label">AUTHORIZATION KEY</span>
+                <span class="auth-hint">ATTEMPT 01 / LEVEL-A</span>
+              </div>
+
+              <form class="auth-input-form" id="auth-form" onsubmit="return false;">
+                <div class="input-wrapper" id="auth-input-wrapper">
+                  <input 
+                    type="password" 
+                    id="auth-input" 
+                    class="auth-input" 
+                    placeholder="ENTER AUTHORIZATION KEY" 
+                    autocomplete="off" 
+                    spellcheck="false"
+                  />
+                  <button type="submit" id="auth-submit-btn" class="auth-submit-btn">
+                    <span>REQUEST</span>
+                    <span class="arrow-icon">→</span>
+                  </button>
+                </div>
+              </form>
+
+              <div class="auth-prompt-subtext">
+                <p class="text-cn">mayi-111, 您的会话已锁定。请出示授权口令。</p>
+                <p class="text-en">MAYI-111, YOUR SESSION IS LOCKED. PRESENT YOUR AUTHORIZATION KEY.</p>
+              </div>
+            </div>
+
+            <!-- Secret Dossier Modal -->
+            <div class="unlocked-dossier" id="unlocked-dossier">
+              <div class="dossier-inner">
+                <div class="dossier-header">
+                  <span class="auth-granted-badge">✓ AUTHORIZATION GRANTED // 档案已核验解密</span>
+                  <button class="dossier-close-btn" id="dossier-close-btn">✕</button>
+                </div>
+                <h3 class="dossier-title">机密操作员档案 // OPERATOR DOSSIER</h3>
+                <p class="dossier-summary">mayi-111，独立图形学与前端开发者，GARGANTUA 广义相对论克尔黑洞实时物理渲染引擎作者。专注纯浏览器环境极限数理仿真与现代工业美学交互架构。</p>
+                <div class="dossier-skills">
+                  <span class="skill-pill">WebGL 2.0</span>
+                  <span class="skill-pill">GLSL Raymarching</span>
+                  <span class="skill-pill">Kerr Metric / Relativity</span>
+                  <span class="skill-pill">Three.js</span>
+                  <span class="skill-pill">Vanilla JS</span>
+                  <span class="skill-pill">123KB Single-file Engine</span>
+                </div>
+                <div class="dossier-secret-box">
+                  <div class="secret-title">核心开源信令:</div>
+                  <code>https://github.com/mayi-111/GARGANTUA-Blackhole-demo</code>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 02: ARCHITECTURE MATRIX (技术栈架构 // GARGANTUA STACK & ARCHITECTURE)
+         ========================================================================= -->
+    <section class="content-section page-section" id="skills" data-index="2" data-label="架构">
+      <div class="sec-header-block">
+        <span class="sec-index">02</span>
+        <div class="sec-title-group">
+          <h2 class="sec-chinese-title">技术架构</h2>
+          <span class="sec-english-title">ARCHITECTURE // GARGANTUA 物理引擎与图形技术矩阵</span>
+        </div>
+        <div class="sec-decor-line"></div>
+      </div>
+
+      <div class="skills-category-grid">
+        
+        <!-- Category 1: 数理与广义相对论 -->
+        <div class="skill-group-card">
+          <div class="sg-head">
+            <span class="sg-icon">⟨/⟩</span>
+            <h3 class="sg-title">数理与相对论 / RELATIVITY</h3>
+          </div>
+          <div class="sg-tags-deck">
+            <div class="skill-chip highlight">
+              <span class="chip-name">克尔度规 (Kerr Metric)</span>
+              <span class="chip-level">98%</span>
+            </div>
+            <div class="skill-chip highlight">
+              <span class="chip-name">零测地线方程 (Null Geodesic)</span>
+              <span class="chip-level">96%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">RK4 数值步进积分器</span>
+              <span class="chip-level">94%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">多普勒集束与频移</span>
+              <span class="chip-level">95%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">能层与光子球动力学</span>
+              <span class="chip-level">92%</span>
+            </div>
+          </div>
+          <p class="sg-note">基于波雅尔-林德奎斯特坐标精确解算旋转黑洞引力场与时空拖拽效应。</p>
+        </div>
+
+        <!-- Category 2: 着色器与图形管线 -->
+        <div class="skill-group-card">
+          <div class="sg-head">
+            <span class="sg-icon">✧</span>
+            <h3 class="sg-title">着色器与管线 / GRAPHICS</h3>
+          </div>
+          <div class="sg-tags-deck">
+            <div class="skill-chip highlight">
+              <span class="chip-name">GLSL 着色器语言</span>
+              <span class="chip-level">96%</span>
+            </div>
+            <div class="skill-chip highlight">
+              <span class="chip-name">WebGL 2.0 原生管线</span>
+              <span class="chip-level">95%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">光线步进 (Raymarching)</span>
+              <span class="chip-level">94%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">Three.js 场景调度</span>
+              <span class="chip-level">90%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">黑体辐射光谱积分</span>
+              <span class="chip-level">92%</span>
+            </div>
+          </div>
+          <p class="sg-note">像素级着色器并行计算，呈现光子在极端时空凹陷中的无限弯曲回旋。</p>
+        </div>
+
+        <!-- Category 3: 轻量工程与极致交付 -->
+        <div class="skill-group-card">
+          <div class="sg-head">
+            <span class="sg-icon">⚙</span>
+            <h3 class="sg-title">轻量交付 / ARCHITECTURE</h3>
+          </div>
+          <div class="sg-tags-deck">
+            <div class="skill-chip highlight">
+              <span class="chip-name">单文件交付 (123 KB)</span>
+              <span class="chip-level">100%</span>
+            </div>
+            <div class="skill-chip highlight">
+              <span class="chip-name">零外部网络依赖</span>
+              <span class="chip-level">100%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">60 FPS 性能预算</span>
+              <span class="chip-level">96%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">原生 ESNext / TS</span>
+              <span class="chip-level">95%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">Vite 生产构建优化</span>
+              <span class="chip-level">94%</span>
+            </div>
+          </div>
+          <p class="sg-note">无需重型渲染后端或复杂依赖，123 KB 单一文件直接在现代浏览器开箱即跑。</p>
+        </div>
+
+        <!-- Category 4: 工业美学与交互工程 -->
+        <div class="skill-group-card">
+          <div class="sg-head">
+            <span class="sg-icon">❖</span>
+            <h3 class="sg-title">交互与体验 / INTERFACE</h3>
+          </div>
+          <div class="sg-tags-deck">
+            <div class="skill-chip highlight">
+              <span class="chip-name">3D 轴测卡匣抽拉交互</span>
+              <span class="chip-level">96%</span>
+            </div>
+            <div class="skill-chip highlight">
+              <span class="chip-name">Web Audio 程序音效</span>
+              <span class="chip-level">92%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">拟态硬件物理触感</span>
+              <span class="chip-level">94%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">整屏物理滑动画卷</span>
+              <span class="chip-level">95%</span>
+            </div>
+            <div class="skill-chip">
+              <span class="chip-name">全键盘与无障碍支持</span>
+              <span class="chip-level">92%</span>
+            </div>
+          </div>
+          <p class="sg-note">严苛把控工业级高保真微动效，实现指尖与终端机器的机械触感共鸣。</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 03: ARCHIVE INDEX // 3D 工程档案卡匣库 (深度复刻 作品简介参考图.png)
+         ========================================================================= -->
+    <section class="section-shelf-fullscreen page-section" id="projects" data-index="3" data-label="作品">
+      <!-- 3D Slotted Archive Cassette Stage (Exact match to 作品简介参考图.png) -->
+      <div class="archive-shelf-stage">
+        
+        <!-- Top HUD Status Bar (Exact reproduction of 作品简介参考图.png) -->
+        <div class="shelf-top-hud">
+          <div class="rhine-brand-line">
+            <span class="rhine-bold">RHINE LAB</span>
+            <div class="rhine-sub-group">
+              <span class="rhine-sub">SYNTHESIZE INFORMATION</span>
+              <span class="rhine-sub">ANALYSIS <b>OS</b></span>
+            </div>
+          </div>
+          <div class="shelf-meta-right">
+            <span class="search-tag mono">🔍 ARCHIVE INDEX [ / ]</span>
+            <span class="saved-tag mono">+ SAVED 00</span>
+            <span class="shelf-clock-icon">🕒</span>
+          </div>
+        </div>
+
+        <!-- The Three.js 3D Viewport: Rows of slotted white archive cassettes in perspective -->
+        <div id="archive-3d-shelf" class="archive-3d-shelf-viewport"></div>
+
+        <!-- Interactive Center HUD Overlay connected to the Lifted Box (Exact reproduction of 作品简介参考图.png) -->
+        <div class="shelf-floating-hud" id="shelf-floating-hud">
+          <div class="hud-center-marker">
+            <div class="hud-left-meta mono">
+              <span class="hud-db-tag" id="shelf-hud-category">INTERNAL DATABASE / 工程研究</span>
+            </div>
+            <div class="hud-rule-line left"></div>
+            <div class="hud-info-badge">
+              <h3 class="hud-file-num mono" id="shelf-hud-filenum">FILE NUMBER: X-001</h3>
+              <span class="hud-sub-label">结构与边界</span>
+              <button class="hud-access-btn" id="shelf-access-file-btn" title="打开此档案的详细信息 (ENTER)">
+                <span>ACCESS FILE</span>
+                <span class="arrow">→</span>
+              </button>
+            </div>
+            <div class="hud-rule-line right"></div>
+            <div class="hud-right-meta mono">
+              <span class="hud-ref-label">REFERENCE AREA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation & Controls (Matching 作品简介参考图.png) -->
+        <div class="shelf-bottom-bar">
+          <div class="shelf-left-counter">
+            <span class="sub-txt mono">ARCHIVE / SELECT</span>
+            <div class="num-row">
+              <b class="cur-num mono" id="shelf-current-index">01</b>
+              <span class="slash mono">/</span>
+              <span class="tot-num mono">08</span>
+            </div>
+            <div class="auth-dot-stamp mono">
+              <span class="stamp-square">■</span> SESSION AUTHORIZED
+            </div>
+          </div>
+
+          <!-- File Row Arrows ↑ ↓ -->
+          <div class="shelf-row-controls">
+            <button class="step-btn" id="shelf-prev-file" title="上一个档案 (键盘 ↑)">↑</button>
+            <div class="notch-indicators mono">
+              <span>|</span><span>|</span><span>|</span><span>|</span><span>|</span>
+            </div>
+            <button class="step-btn" id="shelf-next-file" title="下一个档案 (键盘 ↓)">↓</button>
+          </div>
+
+          <!-- Column Selector ← → -->
+          <div class="shelf-col-controls">
+            <button class="step-col-btn" id="shelf-prev-col" title="上一列 (键盘 ←)">←</button>
+            <div class="col-text-box">
+              <span class="col-num mono" id="shelf-current-column">COLUMN 03 / 05</span>
+              <span class="col-name" id="shelf-current-column-name">工程研究</span>
+            </div>
+            <button class="step-col-btn" id="shelf-next-col" title="下一列 (键盘 →)">→</button>
+          </div>
+
+          <div class="shelf-right-credits">
+            <span class="power-tag mono">POWERED BY <b>RHINE LAB</b></span>
+            <span class="operator-tag mono">JOYCE MOORE / 09:41:00 / REINITIALIZE ↗</span>
+          </div>
+        </div>
+
+        <!-- Hint Prompt Subtitle -->
+        <div class="shelf-hint-sub mono">
+          <span class="hot-red">← → 切换列 / ↑ ↓ 前后档案 / ENTER 读取 / 拖拽旋转 3D 视界</span>
+          <span class="shelf-cycle-pill">GARGANTUA 相对论引擎 · 7 项核心架构模块连续切换</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 04: FEEDBACK & SIGNAL IN (留言终端 // 本地安全加密通联)
+         ========================================================================= -->
+    <section class="content-section page-section" id="feedback" data-index="4" data-label="留言">
+      <div class="sec-header-block">
+        <span class="sec-index">04</span>
+        <div class="sec-title-group">
+          <h2 class="sec-chinese-title">留言终端</h2>
+          <span class="sec-english-title">FEEDBACK // SIGNAL IN · 本地安全加密通联</span>
+        </div>
+        <div class="sec-decor-line"></div>
+      </div>
+
+      <div class="feedback-split-layout">
+        
+        <div class="feedback-info-panel">
+          <p class="fb-lead">
+            本表单基于纯静态前端架构运行，无任何第三方追踪脚本或远端数据库。
+            提交后将在浏览器本地生成结构化保密传输报文，方便您复制并通过邮件或其他渠道快速发送。
+          </p>
+          <div class="fb-specs-box">
+            <div class="spec-row">
+              <span class="k">传输协议</span>
+              <span class="v">LOCAL SEALED // 零云端隐私泄露</span>
+            </div>
+            <div class="spec-row">
+              <span class="k">响应时效</span>
+              <span class="v">GitHub / 邮件渠道高效回复</span>
+            </div>
+            <div class="spec-row">
+              <span class="k">字符编码</span>
+              <span class="v">UTF-8 • 支持中英双语</span>
+            </div>
+          </div>
+          <div class="fb-hint-alert">
+            <span class="alert-icon">ℹ</span>
+            <span>注：表单内置校验规则，未按规范填写时<b>输入框将标红并触发警报音</b>。</span>
+          </div>
+        </div>
+
+        <div class="feedback-form-panel">
+          <form class="terminal-feedback-form" id="feedback-form" novalidate>
+            
+            <!-- Field 1: Name -->
+            <div class="form-field-group">
+              <label for="fb-name" class="field-label">
+                称呼 <span class="required-star">*</span>
+                <span class="label-en mono">NAME</span>
+              </label>
+              <input type="text" id="fb-name" class="tech-input" placeholder="请问如何称呼您？" maxlength="40">
+              <div class="field-error-notice">
+                <span class="err-icon">⚠</span>
+                <span class="err-text">称呼不能为空，请填写称呼。</span>
+              </div>
+            </div>
+
+            <!-- Field 2: Email -->
+            <div class="form-field-group">
+              <label for="fb-email" class="field-label">
+                邮箱 <span class="required-star">*</span>
+                <span class="label-en mono">EMAIL</span>
+              </label>
+              <input type="email" id="fb-email" class="tech-input" placeholder="your_email@domain.com" maxlength="80">
+              <div class="field-error-notice">
+                <span class="err-icon">⚠</span>
+                <span class="err-text">请输入有效且规范的电子邮箱格式。</span>
+              </div>
+            </div>
+
+            <!-- Field 3: Message -->
+            <div class="form-field-group">
+              <label for="fb-message" class="field-label">
+                留言内容 <span class="required-star">*</span>
+                <span class="label-en mono">MESSAGE</span>
+              </label>
+              <textarea id="fb-message" class="tech-textarea" placeholder="请至少输入 6 个字，说明您的来意或技术交流事项..." maxlength="600" rows="4"></textarea>
+              <div class="field-error-notice">
+                <span class="err-icon">⚠</span>
+                <span class="err-text">内容过短，请至少输入 6 个字。</span>
+              </div>
+              <div class="char-counter mono">
+                <span id="fb-msg-counter">0</span> / 600
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-submit-signal">
+              <span>发送信令 / TRANSMIT SIGNAL</span>
+              <span class="arrow">→</span>
+            </button>
+
+            <!-- Dynamic Transmission Status Box -->
+            <div id="fb-form-status" class="form-status-msg"></div>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 05: CONTACT & SAY HI (通联矩阵 // 波纹效果背景参考图)
+         ========================================================================= -->
+    <footer class="sys-footer page-section" id="contact" data-index="5" data-label="通联">
+      <div class="footer-hud-divider">
+        <span class="divider-cross">+</span>
+        <span class="divider-text">COMMUNICATION LINK // 通联终端</span>
+        <span class="divider-cross">+</span>
+      </div>
+
+      <div class="footer-center-content">
+        
+        <!-- Social Icon Buttons -->
+        <div class="contact-header-row">
+          <span class="contact-title">Contact & Repositories</span>
+          <div class="social-icon-links">
+            <a href="https://github.com/mayi-111" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="访问 GitHub 个人主页">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="调阅 GARGANTUA 项目仓库">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo/issues" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub Issues / 交流讨论">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Giant Typography (LET'S CREATE TOGETHER) -->
+        <div class="footer-hero-headline">
+          <h1 class="headline-text">LET'S CREATE</h1>
+          <h1 class="headline-text">TOGETHER</h1>
+        </div>
+
+        <!-- Minimal Badges Deck -->
+        <div class="contact-badges-deck">
+          <a href="https://github.com/mayi-111" target="_blank" rel="noopener noreferrer" class="minimal-contact-badge">
+            <span class="badge-title">GITHUB ⬡</span>
+            <span class="badge-val">@mayi-111</span>
+            <span class="badge-copy-hint">访问主页 ↗</span>
+          </a>
+
+          <span class="badge-sep">| ― |</span>
+
+          <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="minimal-contact-badge">
+            <span class="badge-title">FLAGSHIP REPO ✧</span>
+            <span class="badge-val">GARGANTUA-Blackhole-demo</span>
+            <span class="badge-copy-hint">调阅代码 ↗</span>
+          </a>
+
+          <span class="badge-sep">| ― |</span>
+
+          <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo/issues" target="_blank" rel="noopener noreferrer" class="minimal-contact-badge">
+            <span class="badge-title">DISCUSSIONS ✉</span>
+            <span class="badge-val">Issues & Collab</span>
+            <span class="badge-copy-hint">发起探讨 ↗</span>
+          </a>
+        </div>
+
+        <!-- Chamfered SAY HI Button -->
+        <div class="say-hi-container">
+          <button class="say-hi-btn" id="say-hi-btn">
+            <span class="say-hi-text">SAY HI</span>
+          </button>
+        </div>
+
+        <!-- System Status & Copyright -->
+        <div class="footer-bottom-meta">
+          <div class="meta-row">
+            <span>© 2026 mayi-111 · RHINE LAB OS TERMINAL · ALL RIGHTS RESERVED</span>
+            <a href="#top" class="back-to-top-link">回到顶部 ↑</a>
+          </div>
+          <div class="meta-row dim mono">
+            <span>FLAGSHIP: GARGANTUA RELATIVISTIC KERR BLACK HOLE</span>
+            <span>RENDER ENGINE: 3D PARAMETRIC SLAT RIBBON & WEBGL GLSL</span>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- =========================================================================
+       SIDEBAR: 3D PARAMETRIC SCULPTURE & WAVE CONSOLE (3D控制台)
+       ========================================================================= -->
+  <aside class="blackhole-sidebar" id="control-sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title-group">
+        <span class="sidebar-icon">⬡</span>
+        <h3 class="sidebar-title">SCULPTURE & VISUAL CONSOLE</h3>
+        <span class="sidebar-subtitle">纯白3D雕塑与视觉参数调控终端</span>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close-btn" title="收起控制台">✕</button>
+    </div>
+
+    <div class="sidebar-scrollable-content">
+      
+      <!-- Preset Configurations -->
+      <div class="control-group">
+        <label class="group-label">PRESET CONFIG // 典型雕塑形态预设</label>
+        <div class="preset-btn-grid">
+          <button class="preset-btn active" data-preset="mobius">
+            <span class="p-name">Mobius Ribbon</span>
+            <span class="p-sub">莫比乌斯 · 经典参数环</span>
+          </button>
+          <button class="preset-btn" data-preset="helix">
+            <span class="p-name">Double Helix</span>
+            <span class="p-sub">双螺旋 · 密集肋骨</span>
+          </button>
+          <button class="preset-btn" data-preset="cyber">
+            <span class="p-name">Cyber Strip</span>
+            <span class="p-sub">宽带展开 · 高频脉冲</span>
+          </button>
+          <button class="preset-btn" data-preset="minimal">
+            <span class="p-name">Minimal Grid</span>
+            <span class="p-sub">极简形态 · 舒展空间</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sliders -->
+      <div class="control-group">
+        <div class="slider-header">
+          <span class="slider-title">RIBBON TWIST ANGLE</span>
+          <span class="slider-value" id="val-twist">2.40 rad</span>
+        </div>
+        <p class="param-desc">3D 莫比乌斯曲面沿路径扭转角速率</p>
+        <input type="range" id="param-twist" min="0.5" max="6.0" step="0.1" value="2.40" class="tech-slider">
+      </div>
+
+      <div class="control-group">
+        <div class="slider-header">
+          <span class="slider-title">SCULPTURE RADIUS</span>
+          <span class="slider-value" id="val-radius">4.20 R</span>
+        </div>
+        <p class="param-desc">空间参数化雕塑宏观视界尺度</p>
+        <input type="range" id="param-radius" min="2.0" max="6.5" step="0.1" value="4.20" class="tech-slider">
+      </div>
+
+      <div class="control-group">
+        <div class="slider-header">
+          <span class="slider-title">SLATS DENSITY</span>
+          <span class="slider-value" id="val-slats">380 SLATS</span>
+        </div>
+        <p class="param-desc">建筑肋板（Slats）网格离散细分数量</p>
+        <input type="range" id="param-slats" min="120" max="600" step="10" value="380" class="tech-slider">
+      </div>
+
+      <div class="control-group">
+        <div class="slider-header">
+          <span class="slider-title">SWAY & ORBIT SPEED</span>
+          <span class="slider-value" id="val-speed">0.60 x</span>
+        </div>
+        <p class="param-desc">雕塑呼吸式晃动与鼠标视差响应速率</p>
+        <input type="range" id="param-speed" min="0.1" max="2.0" step="0.05" value="0.60" class="tech-slider">
+      </div>
+
+      <div class="control-group">
+        <div class="slider-header">
+          <span class="slider-title">WAVE COLLISION FORCE</span>
+          <span class="slider-value" id="val-ripple">1.00x</span>
+        </div>
+        <p class="param-desc">背景等高线鼠标物理排斥弹力碰撞范围</p>
+        <input type="range" id="param-ripple" min="0.3" max="2.5" step="0.1" value="1.00" class="tech-slider">
+      </div>
+
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="status-indicator">
+        <span class="pulse-dot"></span>
+        <span id="stat-fps">60 FPS</span>
+        <span class="sep">|</span>
+        <span>ENGINE: THREE.JS PARAMETRIC</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       HARD CUT WARNING LOCKDOWN FULL-SCREEN OVERLAY (个人名片+黑夜模式参考图.png)
+       ========================================================================= -->
+  <div class="warning-lockdown-overlay" id="warning-lockdown-overlay" aria-hidden="true">
+    <div class="warning-border-frame"></div>
+    
+    <div class="warning-center-box">
+      <div class="warning-header-row">
+        <span class="warning-icon">⚠</span>
+        <h2 class="warning-title">WARNING</h2>
+      </div>
+
+      <div class="warning-message-list">
+        <div class="msg-row">
+          <span class="msg-text">AUTHENTICATION FAILED</span>
+          <span class="status-bullet uncompleted">○</span>
+        </div>
+        <div class="msg-row">
+          <span class="msg-text">ILLICIT ACCESS DETECTED</span>
+          <span class="status-bullet uncompleted">○</span>
+        </div>
+        <div class="msg-row">
+          <span class="msg-text">PERMISSION DENIED - ATTEMPT 01</span>
+          <span class="status-bullet uncompleted">○</span>
+        </div>
+        <div class="msg-row active">
+          <span class="msg-text">RETURNING TO ACCESS PORTAL</span>
+          <span class="status-bullet current">●</span>
+        </div>
+      </div>
+
+      <!-- 2.6s Countdown Timer -->
+      <div class="lockdown-timer-bar">
+        <div class="timer-fill" id="lockdown-timer-fill"></div>
+      </div>
+    </div>
+
+    <div class="warning-bottom-alert">
+      <p class="alert-cn">检测到非法访问，权限已被拒绝。</p>
+      <p class="alert-en">ILLICIT ACCESS DETECTED, PERMISSION DENIED.</p>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PROJECT DETAIL DOSSIER MODAL (打开显示详细信息)
+       ========================================================================= -->
+  <div class="project-detail-modal" id="project-detail-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="project-modal-backdrop"></div>
+    <div class="modal-dossier-card">
+      <div class="modal-top-bar">
+        <div class="m-meta-left">
+          <span class="rhine-mini-icon">⬡</span>
+          <span class="m-filenum mono" id="pm-filenum">FILE NUMBER: X-001</span>
+          <span class="m-category mono" id="pm-category">工程研究 / 图形学实验</span>
+        </div>
+        <button class="modal-close-btn" id="project-modal-close" title="关闭档案 (ESC)">✕</button>
+      </div>
+
+      <div class="modal-body-content">
+        <div class="m-title-group">
+          <h2 class="m-title" id="pm-title">GARGANTUA 黑洞实时渲染</h2>
+          <h3 class="m-subtitle mono" id="pm-subtitle">RELATIVISTIC KERR BLACK HOLE ENGINE</h3>
+        </div>
+
+        <!-- Relativistic Kerr Accretion Disk Live Visual for X-001 -->
+        <div class="modal-kerr-preview" id="modal-kerr-preview">
+          <canvas id="kerr-canvas" width="640" height="200"></canvas>
+          <div class="kerr-hud-tag mono">
+            <span>GENERAL RELATIVITY // ACCRETION DISK DOPPLER BEAMING SIMULATION</span>
+            <span class="live-dot"><span class="red-dot"></span> LIVE PHYSICS</span>
+          </div>
+        </div>
+
+        <p class="m-desc" id="pm-desc">
+          从零实现的广义相对论黑洞实时物理可视化引擎：引力透镜光线偏折、吸积盘极端相对论多普勒频移、光子环与事件视界。单文件 123 KB 交付，零外部依赖，直接在纯 WebGL 环境下计算测地线光线弯曲。
+        </p>
+
+        <div class="m-specs-row">
+          <div class="spec-item">
+            <span class="k mono">METRIC 指标</span>
+            <b class="v red-hot mono" id="pm-metric">单文件 123 KB · 零依赖 · 60 FPS</b>
+          </div>
+          <div class="spec-item">
+            <span class="k mono">RELEASE 发布年份</span>
+            <b class="v mono" id="pm-year">2026</b>
+          </div>
+        </div>
+
+        <div class="m-tech-section">
+          <span class="tech-label mono">TECH STACK // 技术栈</span>
+          <div class="m-tech-stack" id="pm-tech-tags"></div>
+        </div>
+
+        <div class="m-actions">
+          <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="pm-github-btn">
+            <span>前往 GitHub 仓库调阅代码</span> <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Main JavaScript Entrypoint -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
