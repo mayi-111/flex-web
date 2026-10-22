@@ -13,9 +13,16 @@ import { Archive3DShelf } from './components/archive3DShelf.js';
 import { FeedbackForm } from './components/feedbackForm.js';
 import { FooterContact } from './components/footerContact.js';
 import { FullpageScroll } from './components/fullpageScroll.js';
+import { BootEntrance } from './components/bootEntrance.js';
+import { InteractiveTelemetry } from './components/interactiveTelemetry.js';
+import { InteractiveArchitecture } from './components/interactiveArchitecture.js';
+import { InteractiveWelkinShelf } from './components/interactiveWelkinShelf.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[RHINE LAB OS] Booting terminal subsystems...');
+
+  // 0. Cinematic Terminal Boot Entrance Animation (简约大气开场入场)
+  const bootEntrance = new BootEntrance();
 
   // 1. Audio Toggle & First Gesture Unlock
   const audioBtn = document.getElementById('audio-toggle-btn');
@@ -80,6 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 11. Full-Page Section Snapping Engine ("以整块的单位来运行和滑动")
   const fullpageScroll = new FullpageScroll();
+
+  // 12. Section 01 Interactive Telemetry (Tabs, Geodesic Oscilloscope, Metric Switcher, GPU Probe, Specs Copy)
+  const interactiveTelemetry = new InteractiveTelemetry();
+
+  // 13. Section 02 Interactive Architecture Matrix (Category Filter Bar & GLSL / Formula Inspector Modal)
+  const interactiveArch = new InteractiveArchitecture();
+
+  // 14. Section 03 Interactive Welkin Shelf (Quick Module Pills, Slogan Shockwaves, Laser Photon Sim)
+  const interactiveWelkin = new InteractiveWelkinShelf();
 
   // Keyboard shortcut Ctrl+M for audio
   window.addEventListener('keydown', (e) => {

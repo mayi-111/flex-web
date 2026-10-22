@@ -23,7 +23,50 @@ export class FeedbackForm {
   init() {
     this.bindCounter();
     this.bindLiveValidation();
+    this.bindQuickPresets();
+    this.bindProtocolSwitcher();
     this.bindSubmit();
+  }
+
+  bindQuickPresets() {
+    const presetPills = document.querySelectorAll('.fb-quick-pill');
+    presetPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        sound.playTypewriter();
+        const text = pill.dataset.text || '';
+        if (this.msgInput) {
+          this.msgInput.value = text;
+          if (this.msgCounter) this.msgCounter.textContent = text.length;
+          this.validateField(this.msgInput);
+          this.msgInput.focus();
+        }
+      });
+    });
+  }
+
+  bindProtocolSwitcher() {
+    const protoBtns = document.querySelectorAll('.feedback-protocol-bar .proto-btn');
+    const hashCodeEl = document.getElementById('fb-hash-code');
+    if (!protoBtns.length) return;
+
+    const hashes = {
+      'aes256': '0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 [GCM-256 SEALED]',
+      'quantum': '0x7f4a91c83e20bfd6489a2bc158dfa7329108c90b6a2e41584c3127810e451a92 [BB84 ENTANGLED]',
+      'morse': '·-·· --- -·-· ·- ·-·· / -- --- ·-· ··· · / -·· · -·-· --- -·· · [BASE-32 TELETYPE]'
+    };
+
+    protoBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        sound.playChirp();
+        protoBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const protoKey = btn.dataset.proto || 'aes256';
+        if (hashCodeEl && hashes[protoKey]) {
+          hashCodeEl.textContent = hashes[protoKey];
+        }
+      });
+    });
   }
 
   bindCounter() {

@@ -64,6 +64,7 @@ export class NeumorphicSwitch {
     }
 
     localStorage.setItem('rhine_terminal_theme', isDark ? 'dark' : 'light');
+    window.dispatchEvent(new CustomEvent('theme-change', { detail: { isDark } }));
 
     if (playAudio) {
       sound.playSwitch(isDark);

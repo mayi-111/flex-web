@@ -207,6 +207,9 @@ export class FullpageScroll {
     // If a modal or sidebar is open, allow native scroll inside that modal
     if (this.isModalOpen()) return;
 
+    // If hovering inside Welkin 3D Glass Stage (#feature-stage), let Welkin handle card flipping
+    if (e.target.closest('#feature-stage') || e.target.closest('.welkin-home-view')) return;
+
     // Ignore tiny wheel trackpad jitters
     if (Math.abs(e.deltaY) < 16) return;
 

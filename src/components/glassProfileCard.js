@@ -25,6 +25,8 @@ export class GlassProfileCard {
     this.eventLogText = document.getElementById('latest-event-text');
 
     this.isLockdownActive = false;
+    this.lockdownTimer = null;
+    this.lockdownDuration = 1000; // Reduced warning duration to 1.0s
 
     this.init();
   }
@@ -34,6 +36,22 @@ export class GlassProfileCard {
     this.bindInputs();
     this.bindDossier();
     this.bindCustomName();
+    this.bindLockdownDismiss();
+  }
+
+  bindLockdownDismiss() {
+    if (this.lockdownOverlay) {
+      this.lockdownOverlay.addEventListener('click', () => {
+        this.dismissLockdown();
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (this.isLockdownActive && (e.key === 'Escape' || e.key === 'Enter')) {
+        e.preventDefault();
+        this.dismissLockdown();
+      }
+    });
   }
 
   startClock() {
@@ -94,7 +112,7 @@ export class GlassProfileCard {
     this.input.value = '';
   }
 
-  // --- Rejection & 2.6s Hard Cut Lockdown Alarm (Exact match to reference) ---
+  // --- Rejection & 1.0s Hard Cut Lockdown Alarm (Reduced duration) ---
   handleFailure() {
     this.isLockdownActive = true;
     sound.playDenied();
@@ -110,28 +128,41 @@ export class GlassProfileCard {
     this.lockdownOverlay.classList.add('active');
     this.lockdownOverlay.setAttribute('aria-hidden', 'false');
 
-    // 3. Reset and trigger 2.6s countdown bar
+    // 3. Reset and trigger 1.0s countdown bar
     if (this.timerFill) {
       this.timerFill.style.transition = 'none';
       this.timerFill.style.width = '100%';
       void this.timerFill.offsetWidth; // Force reflow
-      this.timerFill.style.transition = 'width 2.6s linear';
+      this.timerFill.style.transition = `width ${this.lockdownDuration}ms linear`;
       this.timerFill.style.width = '0%';
     }
 
-    // 4. Automatically recover in exactly 2.6 seconds
-    setTimeout(() => {
-      this.lockdownOverlay.classList.remove('active');
-      this.lockdownOverlay.setAttribute('aria-hidden', 'true');
-      this.inputWrapper.classList.remove('denied');
+    // 4. Automatically recover in 1.0 second (or instantly via click/ESC)
+    if (this.lockdownTimer) clearTimeout(this.lockdownTimer);
+    this.lockdownTimer = setTimeout(() => {
+      this.dismissLockdown();
+    }, this.lockdownDuration);
+  }
+
+  dismissLockdown() {
+    if (!this.isLockdownActive) return;
+    if (this.lockdownTimer) {
+      clearTimeout(this.lockdownTimer);
+      this.lockdownTimer = null;
+    }
+
+    this.lockdownOverlay?.classList.remove('active');
+    this.lockdownOverlay?.setAttribute('aria-hidden', 'true');
+    this.inputWrapper?.classList.remove('denied');
+    if (this.input) {
       this.input.value = '';
       this.input.focus();
-      this.isLockdownActive = false;
+    }
+    this.isLockdownActive = false;
 
-      if (this.eventLogText) {
-        this.eventLogText.textContent = 'PORTAL RECOVERED 会话就绪';
-      }
-    }, 2600);
+    if (this.eventLogText) {
+      this.eventLogText.textContent = 'PORTAL RECOVERED 会话就绪';
+    }
   }
 
   bindDossier() {

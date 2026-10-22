@@ -4,6 +4,8 @@
  * Lines deflect, compress, and oscillate with elastic physical collision when mouse sweeps past.
  */
 
+import { sound } from './soundEngine.js';
+
 export class WaveBackground {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -118,6 +120,14 @@ export class WaveBackground {
       this.mouse.targetX = -1000;
       this.mouse.targetY = -1000;
       this.mouse.speed = 0;
+    });
+
+    // Clicking anywhere on the empty background triggers an expanding physical ripple
+    window.addEventListener('click', (e) => {
+      const isInteractive = Boolean(e.target.closest('button, input, textarea, a, select, [role="button"], [role="switch"], .blackhole-sidebar, #post-selector, #feedback-form, .glass-card, .skill-inspector-modal, .telemetry-hud-card, .specs-table-card, .bio-paragraphs, .welkin-side-editorial, .sys-header, .unlocked-dossier, .toast-container'));
+      if (isInteractive) return;
+      this.triggerShockwave(e.clientX, e.clientY, 36);
+      sound.playPulse();
     });
 
     // Observe theme change

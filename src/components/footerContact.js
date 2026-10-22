@@ -81,13 +81,13 @@ export class FooterContact {
   }
 
   bindCopyButtons() {
-    // Universal Copy Targets across whole page
-    const universalCopyBtns = document.querySelectorAll('.copy-inline-btn, [data-copy], [data-clipboard]');
+    // Universal Copy Targets across whole page + Footer minimal badges
+    const universalCopyBtns = document.querySelectorAll('.copy-inline-btn, [data-copy], [data-clipboard], .qc-item[data-clipboard]');
     universalCopyBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const copyVal = btn.getAttribute('data-copy') || btn.getAttribute('data-clipboard') || btn.textContent.trim();
+        const copyVal = btn.getAttribute('data-clipboard') || btn.getAttribute('data-copy') || btn.textContent.trim();
         const copyLabel = btn.getAttribute('title') || '通联代码';
-        if (copyVal && !btn.getAttribute('href')) {
+        if (copyVal) {
           e.preventDefault();
           this.copyToClipboard(copyVal, copyLabel, btn);
         }
@@ -97,6 +97,24 @@ export class FooterContact {
 
   bindSayHi() {
     if (!this.sayHiBtn) return;
+
+    // Magnetic Cursor Attraction
+    window.addEventListener('pointermove', (e) => {
+      const rect = this.sayHiBtn.getBoundingClientRect();
+      const btnX = rect.left + rect.width * 0.5;
+      const btnY = rect.top + rect.height * 0.5;
+      const dist = Math.hypot(e.clientX - btnX, e.clientY - btnY);
+
+      if (dist < 90) {
+        const pull = (1 - dist / 90) * 16;
+        const angle = Math.atan2(e.clientY - btnY, e.clientX - btnX);
+        const offsetX = Math.cos(angle) * pull;
+        const offsetY = Math.sin(angle) * pull;
+        this.sayHiBtn.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(1.04)`;
+      } else {
+        this.sayHiBtn.style.transform = '';
+      }
+    });
 
     this.sayHiBtn.addEventListener('click', () => {
       sound.playGranted();

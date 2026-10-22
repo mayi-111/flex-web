@@ -12,6 +12,45 @@
   <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
+  <!-- Cinematic Terminal Boot Curtain (简约大气开场入场动画) -->
+  <aside id="terminal-boot-curtain" class="terminal-boot-curtain" aria-label="系统初始化">
+    <div class="boot-grid-decor" aria-hidden="true"></div>
+    <div class="boot-corner-bracket top-left"></div>
+    <div class="boot-corner-bracket top-right"></div>
+    <div class="boot-corner-bracket bottom-left"></div>
+    <div class="boot-corner-bracket bottom-right"></div>
+
+    <div class="boot-core-assembly">
+      <!-- Top Monospace System Header -->
+      <div class="boot-meta-tag mono">
+        <span class="boot-dot live-pulse"></span>
+        <span class="boot-sys-text">RHINE LAB · SPATIAL TERMINAL OS // V4.2</span>
+      </div>
+
+      <!-- Main Logo / Operator Typography with Glint Wireframe -->
+      <div class="boot-brand-wrap">
+        <h1 class="boot-brand-title">MAYI-111</h1>
+        <div class="boot-brand-sub mono">GARGANTUA RELATIVISTIC ENGINE</div>
+      </div>
+
+      <!-- Hairline Minimalist Progress Bar -->
+      <div class="boot-progress-track">
+        <div class="boot-progress-fill" id="boot-progress-bar"></div>
+      </div>
+
+      <!-- Realtime Boot Step Log & Percentage Counter -->
+      <div class="boot-status-row mono">
+        <span class="boot-log-text" id="boot-status-log">INITIALIZING SUBSYSTEMS...</span>
+        <span class="boot-percentage" id="boot-status-pct">00%</span>
+      </div>
+
+      <!-- Quick Skip Hint -->
+      <button type="button" class="boot-skip-hint mono" id="boot-skip-btn">
+        <span>[ CLICK ANYWHERE TO ENTER / 点击任意位置跳过 ]</span>
+      </button>
+    </div>
+  </aside>
+
   <a href="#main" class="skip-link">跳到主要内容</a>
 
   <!-- Dynamic Wave Background Canvas (波纹效果背景参考图) -->
@@ -43,7 +82,7 @@
     <!-- Center Navigation Links -->
     <nav class="header-nav" aria-label="页面快捷导航">
       <a href="#top" class="nav-item">总览</a>
-      <a href="#archive" class="nav-item">档案</a>
+      <a href="#dossier" class="nav-item">档案</a>
       <a href="#skills" class="nav-item">架构</a>
       <a href="#projects" class="nav-item">作品</a>
       <a href="#feedback" class="nav-item">留言</a>
@@ -83,120 +122,78 @@
          SECTION 00: HERO (终端总览 // TERMINAL OVERVIEW)
          ========================================================================= -->
     <section class="section-hero page-section" id="top" data-index="0" data-label="总览">
-      <div class="hero-inner-container">
+      <div class="hero-split-grid">
         
-        <div class="hero-meta-bar">
-          <span class="meta-line"></span>
-          <span class="meta-tag">FILE X-001 / RELATIVISTIC ASTROPHYSICS & GRAPHICS ENGINE</span>
-          <span class="meta-live"><span class="red-dot"></span> LIVE // 2026</span>
-        </div>
-
-        <h1 class="hero-giant-title">
-          BUILD<br>
-          WITH<span class="red-period">.</span><br>
-          INTENT
-        </h1>
-
-        <div class="hero-operator-info">
-          <h2 class="op-name">mayi-111</h2>
-          <span class="op-slash">/</span>
-          <span class="op-title">独立开发者 · 图形学与前端工程师</span>
-          <span class="op-slash">/</span>
-          <span class="op-loc">CN</span>
-        </div>
-
-        <p class="hero-tagline-lede">
-          专注广义相对论天体物理仿真、WebGL / GLSL 实时着色器与轻量极致交付。代表作 <b>GARGANTUA 相对论克尔黑洞实时引擎</b>，
-          以单文件 123 KB 零依赖在纯浏览器中解算弯曲时空测地线光线偏折、吸积盘多普勒集束与光子球。
-        </p>
-
-        <!-- Direct Social & Project Badges Row -->
-        <div class="hero-quick-contacts">
-          <div class="qc-item">
-            <span class="qc-key">GITHUB</span>
-            <span class="qc-val"><a href="https://github.com/mayi-111" target="_blank" rel="noopener noreferrer">@mayi-111</a></span>
-          </div>
-          <div class="qc-item">
-            <span class="qc-key">REPO</span>
-            <span class="qc-val"><a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer">GARGANTUA Demo</a></span>
-          </div>
-          <div class="qc-item">
-            <span class="qc-key">ENGINE</span>
-            <span class="qc-val"><span class="mono">WebGL 2.0 / GLSL</span></span>
-          </div>
-          <div class="qc-item">
-            <span class="qc-key">DELIVERY</span>
-            <span class="qc-val"><span class="mono red-hot">123 KB · 零依赖</span></span>
-          </div>
-        </div>
-
-        <!-- Hero Actions -->
-        <div class="hero-actions-row">
-          <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">调阅 GARGANTUA 仓库 ↗</a>
-          <a href="#projects" class="btn btn-ghost">3D 档案卡匣库 →</a>
-        </div>
-
-        <!-- Scroll Down Hint -->
-        <a href="#archive" class="scroll-guide-hint">
-          <span class="guide-bar"></span>
-          <span>SCROLL / 向下调阅档案</span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         SECTION 01: ARCHIVE & GLASS CARD (个人档案与静态玻璃名片 // SYNTHESIZE INFORMATION)
-         ========================================================================= -->
-    <section class="content-section page-section" id="archive" data-index="1" data-label="档案">
-      <div class="sec-header-block">
-        <span class="sec-index">01</span>
-        <div class="sec-title-group">
-          <h2 class="sec-chinese-title">档案</h2>
-          <span class="sec-english-title">ARCHIVE // SYNTHESIZE INFORMATION ANALYSIS OS</span>
-        </div>
-        <div class="sec-decor-line"></div>
-      </div>
-
-      <div class="archive-split-grid">
-        
-        <!-- Left Column: Biography & Specs -->
-        <div class="archive-bio-col">
-          <div class="bio-paragraphs">
-            <p class="bio-p lead-p">
-              独立图形学与前端开发者，热衷于在纯浏览器环境下挑战物理仿真与图形学极限。
-            </p>
-            <p class="bio-p">
-              开源代表作 <b>GARGANTUA 相对论黑洞引擎</b>：从零实现广义相对论克尔度规（Kerr Metric）下的引力透镜光线弯曲、吸积盘多普勒集束（Doppler Beaming）与爱因斯坦光子球。全引擎仅需 <b>123 KB 单文件</b>，零外部网络或构建依赖，在主流浏览器中稳定以 60 FPS 实时渲染。
-            </p>
-            <p class="bio-p">
-              崇尚极简工业美学、低开销物理动效与可访问性，将前沿天体物理计算以兼具严谨数理与视觉张力的方式呈现给每位访客。
-            </p>
+        <!-- Left Column: Hero Typography & Info -->
+        <div class="hero-inner-container">
+          
+          <div class="hero-meta-bar">
+            <span class="meta-line"></span>
+            <span class="meta-tag">FILE X-001 / RELATIVISTIC ASTROPHYSICS & GRAPHICS ENGINE</span>
+            <span class="meta-live"><span class="red-dot"></span> LIVE // 2026</span>
           </div>
 
-          <!-- Professional Specs Table -->
-          <div class="specs-table-card">
-            <div class="spec-cell">
-              <span class="sc-label">ROLE</span>
-              <span class="sc-val"><b>独立开发者</b> · 图形学与前端工程师</span>
+          <h1 class="hero-giant-title">
+            BUILD<br>
+            WITH<span class="red-period">.</span><br>
+            INTENT
+          </h1>
+
+          <div class="hero-operator-info">
+            <h2 class="op-name">mayi-111</h2>
+            <span class="op-slash">/</span>
+            <span class="op-title">独立开发者 · 图形学与前端工程师</span>
+            <span class="op-slash">/</span>
+            <span class="op-loc">CN</span>
+          </div>
+
+          <p class="hero-tagline-lede">
+            专注广义相对论天体物理仿真、WebGL / GLSL 实时着色器与轻量极致交付。代表作 <b>GARGANTUA 相对论克尔黑洞实时引擎</b>，
+            以单文件 123 KB 零依赖在纯浏览器中解算弯曲时空测地线光线偏折、吸积盘多普勒集束与光子球。
+          </p>
+
+          <!-- Direct Social & Project Badges Row -->
+          <div class="hero-quick-contacts">
+            <div class="qc-item" role="button" tabindex="0" title="点击复制 GitHub 主页链接" data-clipboard="https://github.com/mayi-111">
+              <span class="qc-key">GITHUB</span>
+              <span class="qc-val">@mayi-111 ⎘</span>
             </div>
-            <div class="spec-cell">
-              <span class="sc-label">BASE</span>
-              <span class="sc-val">CN · 开放开源技术交流</span>
+            <div class="qc-item" role="button" tabindex="0" title="点击复制 GARGANTUA 仓库地址" data-clipboard="https://github.com/mayi-111/GARGANTUA-Blackhole-demo">
+              <span class="qc-key">REPO</span>
+              <span class="qc-val">GARGANTUA ⎘</span>
             </div>
-            <div class="spec-cell">
-              <span class="sc-label">FOCUS</span>
-              <span class="sc-val">WebGL 2.0 / GLSL · 广义相对论黑洞仿真 · 极简轻量工程</span>
+            <div class="qc-item" role="button" tabindex="0" title="点击复制作业管线规范" data-clipboard="WebGL 2.0 / GLSL 原生单通道片段着色器">
+              <span class="qc-key">ENGINE</span>
+              <span class="qc-val"><span class="mono">WebGL 2.0 / GLSL</span></span>
             </div>
-            <div class="spec-cell">
-              <span class="sc-label">STATUS</span>
-              <span class="sc-val"><span class="green-dot">●</span> GARGANTUA 开源项目活跃维护中</span>
+            <div class="qc-item" role="button" tabindex="0" title="点击复制交付指标" data-clipboard="123 KB 单文件 · 0 依赖 · 60 FPS 顶格">
+              <span class="qc-key">DELIVERY</span>
+              <span class="qc-val"><span class="mono red-hot">123 KB · 零依赖</span></span>
             </div>
           </div>
+
+          <!-- Hero Actions -->
+          <div class="hero-actions-row">
+            <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">调阅 GARGANTUA 仓库 ↗</a>
+            <a href="#projects" class="btn btn-ghost">3D 档案卡匣库 →</a>
+          </div>
+
+          <!-- 3D Background Interaction Tip & Scroll Guide -->
+          <div class="hero-interaction-hint mono">
+            <span class="hint-orbit-icon">✥</span>
+            <span>按住鼠标拖拽可 360° 自由旋转背景 3D 莫比乌斯雕塑 · 单击空白处激发引力激波</span>
+          </div>
+
+          <!-- Scroll Down Hint -->
+          <a href="#dossier" class="scroll-guide-hint">
+            <span class="guide-bar"></span>
+            <span>SCROLL / 向下调阅档案</span>
+          </a>
+
         </div>
 
-        <!-- Right Column: Frosted Glass Archive Card (Matching 个人名片参考图.png) -->
-        <div class="archive-card-col">
+        <!-- Right Column: Operator Frosted Glass Card (Moved to Section 00) -->
+        <div class="hero-card-col">
           <div class="glass-card" id="glass-profile-card">
             
             <div class="card-header">
@@ -332,6 +329,117 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 01: ARCHIVE & SPECS (个人档案与科研测报 // SYNTHESIZE INFORMATION)
+         ========================================================================= -->
+    <section class="content-section page-section" id="dossier" data-index="1" data-label="档案">
+      <div class="sec-header-block">
+        <span class="sec-index">01</span>
+        <div class="sec-title-group">
+          <h2 class="sec-chinese-title">档案</h2>
+          <span class="sec-english-title">ARCHIVE // SYNTHESIZE INFORMATION ANALYSIS OS</span>
+        </div>
+        <div class="sec-decor-line"></div>
+      </div>
+
+      <div class="archive-split-grid">
+        
+        <!-- Left Column: Biography & Philosophy with Interactive Tabs -->
+        <div class="archive-bio-col">
+          <!-- Interactive Dossier Terminal Tabs -->
+          <div class="archive-dossier-tabs" id="archive-dossier-tabs">
+            <button type="button" class="dossier-tab-btn active" data-tab="bio">01 // 生平档案 BIOGRAPHY</button>
+            <button type="button" class="dossier-tab-btn" data-tab="research">02 // 研学日志 RESEARCH LOG</button>
+            <button type="button" class="dossier-tab-btn" data-tab="manifesto">03 // 架构宣言 MANIFESTO</button>
+          </div>
+
+          <div class="bio-paragraphs" id="archive-bio-paragraphs">
+            <p class="bio-p lead-p">
+              独立图形学与前端开发者，热衷于在纯浏览器环境下挑战物理仿真与图形学极限。
+            </p>
+            <p class="bio-p">
+              开源代表作 <b>GARGANTUA 相对论黑洞引擎</b>：从零实现广义相对论克尔度规（Kerr Metric）下的引力透镜光线弯曲、吸积盘多普勒集束（Doppler Beaming）与爱因斯坦光子球。全引擎仅需 <b>123 KB 单文件</b>，零外部网络或构建依赖，在主流浏览器中稳定以 60 FPS 实时渲染。
+            </p>
+            <p class="bio-p">
+              崇尚极简工业美学、低开销物理动效与可访问性，将前沿天体物理计算以兼具严谨数理与视觉张力的方式呈现给每位访客。
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Specs & Rhine Lab Telemetry HUD -->
+        <div class="archive-telemetry-col">
+          <!-- Professional Specs Table -->
+          <div class="specs-table-card">
+            <div class="spec-cell">
+              <span class="sc-label">ROLE</span>
+              <span class="sc-val"><b>独立开发者</b> · 图形学与前端工程师 ⎘</span>
+            </div>
+            <div class="spec-cell">
+              <span class="sc-label">BASE</span>
+              <span class="sc-val">CN · 开放开源技术交流 ⎘</span>
+            </div>
+            <div class="spec-cell">
+              <span class="sc-label">FOCUS</span>
+              <span class="sc-val">WebGL 2.0 / GLSL · 广义相对论仿真 ⎘</span>
+            </div>
+            <div class="spec-cell">
+              <span class="sc-label">STATUS</span>
+              <span class="sc-val"><span class="green-dot">●</span> GARGANTUA 项目活跃维护中 ⎘</span>
+            </div>
+          </div>
+
+          <!-- Rhine Lab Telemetry HUD Matrix (Interactive) -->
+          <div class="telemetry-hud-card">
+            <div class="hud-card-header">
+              <span class="hud-tag">RHINE LAB // TELEMETRY & ASTROPHYSICS HUD</span>
+              <span class="hud-live-badge"><span class="live-dot-green"></span> ONLINE</span>
+            </div>
+
+            <!-- Live Relativistic Kerr Geodesic Oscilloscope Canvas -->
+            <div class="telemetry-sparkline-box">
+              <canvas id="telemetry-sparkline" width="380" height="74"></canvas>
+              <div class="sparkline-tag mono">
+                <span>GEODESIC CURVATURE // 实时时空测地线声学探针</span>
+                <span class="live-blink-dot">● OSCILLATING</span>
+              </div>
+            </div>
+
+            <div class="hud-metrics-grid">
+              <div class="hud-metric-item selected" data-metric-type="metric" role="button" tabindex="0" title="点击切换广义相对论坐标度规系统">
+                <span class="hm-label">METRIC [CLICK TO CYCLE]</span>
+                <span class="hm-val" id="hm-metric-val">KERR BOYER-LINDQUIST</span>
+              </div>
+              <div class="hud-metric-item" data-metric-type="bundle" role="button" tabindex="0" title="点击调阅 123KB 单文件结构拆解">
+                <span class="hm-label">BUNDLE [INSPECT]</span>
+                <span class="hm-val red-hot">123 KB STANDALONE</span>
+              </div>
+              <div class="hud-metric-item" data-metric-type="fps" role="button" tabindex="0" title="点击调阅渲染帧率性能预算">
+                <span class="hm-label">FPS [BENCHMARK]</span>
+                <span class="hm-val">60.0 FPS LOCKED</span>
+              </div>
+              <div class="hud-metric-item" data-metric-type="dependency" role="button" tabindex="0" title="点击验证 0 依赖脱机运行能力">
+                <span class="hm-label">DEPENDENCY [AUDIT]</span>
+                <span class="hm-val">0 EXTERNAL NPM/CDN</span>
+              </div>
+            </div>
+
+            <!-- GPU Hardware Probe Action Button -->
+            <div class="hud-probe-action-row">
+              <button type="button" class="btn-gpu-probe mono" id="btn-run-gpu-probe">
+                <span class="probe-icon">⚡</span> <span>RUN GPU HARDWARE PROBE / 测算本地算力</span>
+              </button>
+            </div>
+            <div id="gpu-probe-result" class="gpu-probe-result" hidden></div>
+
+            <div class="hud-card-footer">
+              <code id="hud-card-formula-code">ds² = -(1 - 2Mr/ρ²)dt² - (4Mar sin²θ/ρ²)dtdφ + (ρ²/Δ)dr² + ...</code>
+            </div>
           </div>
         </div>
 
@@ -489,13 +597,27 @@
         <!-- Left Editorial Slogan (Exact reproduction of 参考图 1, 2, 3) -->
         <div class="welkin-side-editorial">
           <div class="welkin-brand-mark mono">WELKIN // ARCHIVE</div>
-          <h2 class="welkin-slogan-title" id="welkin-slogan-title">翻一翻。</h2>
-          <p class="welkin-slogan-desc" id="welkin-slogan-desc">
+          <h2 class="welkin-slogan-title" id="welkin-slogan-title" role="button" tabindex="0" title="点击向 3D 档案匣矩阵发射引力激波">翻一翻。</h2>
+          <p class="welkin-slogan-desc" id="welkin-slogan-desc" role="button" tabindex="0" title="点击向 3D 档案匣矩阵发射引力激波">
             档案会跟着动。<br>
             光影也是。
           </p>
-          <div class="welkin-editorial-hint mono">
+          <div class="welkin-editorial-hint mono" id="welkin-editorial-hint" role="button" tabindex="0" title="点击激发波动">
             <span class="hint-dot"></span> 滚轮滑动 · 纯白磨砂玻璃层叠光影
+          </div>
+
+          <!-- Quick Module Jump Navigator -->
+          <div class="welkin-quick-modules" id="welkin-quick-modules">
+            <span class="qm-label mono">MODULE QUICK-JUMP / 模块速查:</span>
+            <div class="qm-pills-row">
+              <button type="button" class="qm-pill active" data-module="0">01 广义相对论</button>
+              <button type="button" class="qm-pill" data-module="1">02 光线弯曲</button>
+              <button type="button" class="qm-pill" data-module="2">03 光子球</button>
+              <button type="button" class="qm-pill" data-module="3">04 能层拖拽</button>
+              <button type="button" class="qm-pill" data-module="4">05 吸积盘</button>
+              <button type="button" class="qm-pill" data-module="5">06 123KB架构</button>
+              <button type="button" class="qm-pill" data-module="6">07 交互工程</button>
+            </div>
           </div>
         </div>
 
@@ -513,79 +635,54 @@
             <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="welkin-window-ext" title="在新标签页查看 GARGANTUA 仓库">↗</a>
           </div>
 
-          <!-- Canvas Inner Top Navigation -->
-          <div class="welkin-canvas-header">
-            <div class="welkin-inner-brand">
-              <span class="brand-text">WELKIN</span>
-            </div>
-            <div class="welkin-inner-nav">
-              <a href="#top" class="w-nav-link active">首页</a>
-              <button class="w-nav-link" id="w-nav-all-modules">所有模块</button>
-              <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="w-nav-link">源码 ↗</a>
-            </div>
-          </div>
-
-          <!-- The Three.js 3D Viewport: Stepped Translucent Frosted Glass Cassettes -->
-          <div id="archive-3d-shelf" class="archive-3d-shelf-viewport"></div>
-
-          <!-- Floating Hover HUD (Follows the lifted cassette in 3D: 客体细节 / 点一下，慢慢展开 / 打开档案 ↗) -->
-          <div class="welkin-floating-hud" id="welkin-floating-hud">
-            <div class="hud-meta-label" id="welkin-hud-meta">客体细节 / 2026.01.12</div>
-            <div class="hud-callout-title" id="welkin-hud-title">点一下，慢慢展开。</div>
-            <button class="hud-open-btn" id="welkin-hud-open-btn" title="展开档案详细内容">
-              <span>打开档案</span>
-              <span class="arrow">↗</span>
-            </button>
-          </div>
-
-          <!-- Bottom HUD Bar -->
-          <div class="welkin-bottom-hud">
-            <!-- Bottom Left Counter & Switcher -->
-            <div class="welkin-counter-box">
-              <div class="counter-row">
-                <span class="cur mono" id="welkin-cur-index">01</span>
-                <span class="slash mono">/</span>
-                <span class="tot mono" id="welkin-tot-index">07</span>
-                <div class="welkin-arrow-btns">
-                  <button class="w-arrow-btn" id="welkin-prev-btn" title="上一个档案 (←)">←</button>
-                  <button class="w-arrow-btn" id="welkin-next-btn" title="下一个档案 (→)">→</button>
+          <!-- Genuine Welkin Glass Scene & Feature Stage -->
+          <div id="home-view" class="welkin-home-view">
+            <section id="feature-stage" class="feature-stage" aria-label="文章档案" data-archive-view="overview">
+              <div id="glass-scene" aria-label="三维玻璃档案：滚轮、滑动或下方按钮选文"><span class="scene-placeholder">载入档案...</span></div>
+              <h1 class="sr-only">GARGANTUA 相对论克尔黑洞档案</h1>
+              <button type="button" id="archive-close" class="archive-close" aria-keyshortcuts="Escape" hidden>← 返回档案</button>
+              <div class="archive-navigation">
+                <span id="feature-position" aria-live="polite">01 / 07</span>
+                <div class="step-controls">
+                  <button type="button" id="previous-archive" aria-label="上一份档案">←</button>
+                  <button type="button" id="next-archive" aria-label="下一份档案">→</button>
+                </div>
+                <span class="scene-guide"><span class="desktop-guide">滚动切换</span><span class="touch-guide">滑动切换</span></span>
+              </div>
+              <div id="post-selector" hidden></div>
+              <div id="feature-media" class="feature-media">
+                <div class="cover-window">
+                  <div class="media-fallback" aria-hidden="true"><svg viewBox="0 0 600 480"><g id="fallback-contours" fill="none" stroke="currentColor" stroke-width=".7"></g></svg></div>
+                  <img id="cover-a" class="cover-layer" alt="" decoding="async" fetchpriority="high">
+                  <img id="cover-b" class="cover-layer" alt="" decoding="async">
+                </div>
+                <span id="cover-status" class="cover-status" role="status" hidden>封面暂未载入</span>
+                <a id="feature-link" class="feature-link" href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer">
+                  <div class="feature-copy">
+                    <p class="post-meta"><span id="feature-category">广义相对论</span><time id="feature-date">2026.01.12</time></p>
+                    <h2 id="feature-title">GARGANTUA 相对论克尔黑洞引擎</h2>
+                  </div>
+                  <span class="read-arrow">打开档案 <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path d="M5 19 19 5M5 5h14v14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                </a>
+                <div id="detail-panel" class="detail-panel" hidden>
+                  <p id="detail-excerpt"></p>
+                  <p id="detail-tags"></p>
+                  <div class="detail-actions-row">
+                    <button type="button" class="btn-laser-sim mono" id="btn-laser-sim" title="在当前模块蓝图画布上激发相对论光子轨迹">
+                      <span>⚡ 激发测地线光子轨道模拟</span>
+                    </button>
+                    <a id="detail-original" href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" data-paper-link>调阅源码 ↗</a>
+                  </div>
                 </div>
               </div>
-              <span class="sub-label mono">滚轮切换</span>
-            </div>
-
-            <!-- Bottom Center Indicator -->
-            <div class="welkin-center-indicator" id="welkin-center-scroll-hint">
-              <span class="arrow">↓</span>
-              <span class="text">所有模块</span>
-            </div>
-          </div>
-
-          <!-- Expanded Detail View (Translucent Frosted Card Overlay - 点一下，档案慢慢打开) -->
-          <div class="welkin-detail-card" id="welkin-detail-card" aria-hidden="true">
-            <button class="welkin-back-btn" id="welkin-back-btn" title="收起并返回玻璃档案层叠 (ESC)">
-              ← 返回档案
-            </button>
-
-            <div class="welkin-detail-sheet">
-              <div class="sheet-meta mono" id="welkin-sheet-meta">关于 GARGANTUA / 2026.01.12</div>
-              <h3 class="sheet-title" id="welkin-sheet-title">GARGANTUA 相对论克尔黑洞引擎。</h3>
-              <p class="sheet-desc" id="welkin-sheet-desc">
-                从零实现的广义相对论黑洞实时物理可视化引擎：引力透镜光线偏折、吸积盘极端相对论多普勒频移、光子环与事件视界。单文件 123 KB 交付，零外部依赖，直接在纯 WebGL 环境下计算测地线光线弯曲。
-              </p>
-              <div class="sheet-metrics-row">
-                <span class="metric-pill mono" id="welkin-sheet-metric">单文件 123 KB · 零外部依赖 · 60 FPS</span>
-                <span class="metric-pill mono" id="welkin-sheet-category">广义相对论 / 实时物理引擎</span>
+              <button id="show-articles" class="show-articles" type="button" aria-expanded="false" aria-controls="archive"><span aria-hidden="true">↓</span><span>所有模块</span></button>
+            </section>
+            <section id="archive" class="archive wrap" aria-labelledby="archive-title" hidden>
+              <div class="archive-head">
+                <h2 id="archive-title">所有模块 <span id="archive-count">7</span></h2>
               </div>
-              <div class="sheet-actions">
-                <a href="https://github.com/mayi-111/GARGANTUA-Blackhole-demo" target="_blank" rel="noopener noreferrer" class="sheet-action-link primary" id="welkin-sheet-repo-link">
-                  阅读全文 / 调阅代码 ↗
-                </a>
-                <button class="sheet-action-link ghost" id="welkin-sheet-next-link">
-                  下一模块 →
-                </button>
-              </div>
-            </div>
+              <div id="entries" class="entries"></div>
+            </section>
           </div>
 
         </div>
@@ -635,6 +732,20 @@
         <div class="feedback-form-panel">
           <form class="terminal-feedback-form" id="feedback-form" novalidate>
             
+            <!-- Interactive Encryption Protocol Switcher -->
+            <div class="feedback-protocol-bar mono">
+              <span class="proto-label">PROTOCOL // 传输加密:</span>
+              <div class="proto-options">
+                <button type="button" class="proto-btn active" data-proto="aes256">AES-256-GCM</button>
+                <button type="button" class="proto-btn" data-proto="quantum">QUANTUM KEY</button>
+                <button type="button" class="proto-btn" data-proto="morse">RAW MORSE</button>
+              </div>
+            </div>
+            <div class="feedback-hash-preview mono" id="fb-hash-preview">
+              <span class="hash-label">CIPHER SHA-256:</span>
+              <span class="hash-code" id="fb-hash-code">0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+            </div>
+
             <!-- Field 1: Name -->
             <div class="form-field-group">
               <label for="fb-name" class="field-label">
@@ -667,7 +778,19 @@
                 留言内容 <span class="required-star">*</span>
                 <span class="label-en mono">MESSAGE</span>
               </label>
-              <textarea id="fb-message" class="tech-textarea" placeholder="请至少输入 6 个字，说明您的来意或技术交流事项..." maxlength="600" rows="4"></textarea>
+
+              <!-- Quick Signal Preset Chips -->
+              <div class="quick-signal-presets">
+                <span class="preset-label mono">QUICK TEMPLATES // 快捷信令:</span>
+                <div class="preset-pills-row">
+                  <button type="button" class="fb-quick-pill" data-text="您好 mayi-111，我在关注您的 GARGANTUA 黑洞实时物理渲染项目，对基于纯 WebGL 2.0 / GLSL 的测地线步进非常感兴趣，希望与您交流图形学与物理着色器实现心得！">💡 技术交流 / GLSL 探讨</button>
+                  <button type="button" class="fb-quick-pill" data-text="您好，我们团队在探索相对论天体物理仿真在 Web 前端的高性能呈现，期望了解 GARGANTUA 克尔度规引擎的开源合作可能。">🔭 黑洞物理合作探讨</button>
+                  <button type="button" class="fb-quick-pill" data-text="您好，对您网页中的 3D 轴测卡匣与纯白雕塑交互架构非常赞赏，希望能向您交流前端工程极致轻量化与工业美学交互经验！">⚡ 前端架构与 3D 动效</button>
+                  <button type="button" class="fb-quick-pill" data-text="您好，在体验您的终端主页时发现了一项体验细节优化点，特此反馈：">🐛 体验反馈与建议</button>
+                </div>
+              </div>
+
+              <textarea id="fb-message" class="tech-textarea" placeholder="请至少输入 6 个字，或点击上方快捷信令快速填入..." maxlength="600" rows="4"></textarea>
               <div class="field-error-notice">
                 <span class="err-icon">⚠</span>
                 <span class="err-text">内容过短，请至少输入 6 个字。</span>
@@ -907,15 +1030,15 @@
         </div>
       </div>
 
-      <!-- 2.6s Countdown Timer -->
+      <!-- 1.0s Countdown Timer (点击屏幕或按 ESC 立即重试) -->
       <div class="lockdown-timer-bar">
         <div class="timer-fill" id="lockdown-timer-fill"></div>
       </div>
     </div>
 
     <div class="warning-bottom-alert">
-      <p class="alert-cn">检测到非法访问，权限已被拒绝。</p>
-      <p class="alert-en">ILLICIT ACCESS DETECTED, PERMISSION DENIED.</p>
+      <p class="alert-cn">检测到非法访问，权限已被拒绝。（点击任意处或按 ESC 立即重试）</p>
+      <p class="alert-en">ILLICIT ACCESS DETECTED, PERMISSION DENIED. (CLICK OR PRESS ESC TO RESUME)</p>
     </div>
   </div>
 

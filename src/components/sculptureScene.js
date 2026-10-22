@@ -37,6 +37,20 @@ export class SculptureScene {
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     this.hudNodes = [];
 
+    // Direct 3D Orbit Drag Tracking
+    this.drag = {
+      isDragging: false,
+      startX: 0,
+      startY: 0,
+      orbitYaw: 0,
+      orbitPitch: 0,
+      targetYaw: 0,
+      targetPitch: 0,
+      lastMoveTime: 0,
+      vx: 0,
+      vy: 0
+    };
+
     this.init();
     this.buildRibbonSculpture();
     this.initHudNodes();
@@ -203,9 +217,59 @@ export class SculptureScene {
       this.renderer.setSize(width, height);
     });
 
+    const isInteractiveTarget = (el) => {
+      if (!el) return false;
+      return Boolean(el.closest('button, input, textarea, a, select, [role="button"], [role="switch"], .blackhole-sidebar, #post-selector, #feedback-form, .glass-card, .skill-inspector-modal, .telemetry-hud-card, .specs-table-card, .bio-paragraphs, .welkin-side-editorial, .sys-header, .unlocked-dossier, .toast-container'));
+    };
+
+    window.addEventListener('pointerdown', (e) => {
+      if (isInteractiveTarget(e.target)) return;
+      this.drag.isDragging = true;
+      this.drag.startX = e.clientX;
+      this.drag.startY = e.clientY;
+      this.drag.vx = 0;
+      this.drag.vy = 0;
+      this.drag.lastMoveTime = performance.now();
+    });
+
     window.addEventListener('pointermove', (e) => {
       this.mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
       this.mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      if (this.drag.isDragging) {
+        const dx = e.clientX - this.drag.startX;
+        const dy = e.clientY - this.drag.startY;
+        this.drag.targetYaw += dx * 0.006;
+        this.drag.targetPitch += dy * 0.006;
+        this.drag.startX = e.clientX;
+        this.drag.startY = e.clientY;
+        const now = performance.now();
+        const dt = Math.max(1, now - this.drag.lastMoveTime);
+        this.drag.vx = dx / dt;
+        this.drag.vy = dy / dt;
+        this.drag.lastMoveTime = now;
+      }
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (this.drag.isDragging) {
+        this.drag.isDragging = false;
+        // Natural release inertia
+        this.drag.targetYaw += this.drag.vx * 8;
+        this.drag.targetPitch += this.drag.vy * 8;
+      }
+    });
+
+    window.addEventListener('pointercancel', () => {
+      this.drag.isDragging = false;
+    });
+
+    // Double-click background to trigger energetic shockwave & realign
+    window.addEventListener('dblclick', (e) => {
+      if (isInteractiveTarget(e.target)) return;
+      this.triggerKeystrokePulse();
+      this.drag.targetYaw *= 0.15;
+      this.drag.targetPitch *= 0.15;
     });
 
     // Theme changes
@@ -268,10 +332,14 @@ export class SculptureScene {
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
     this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
 
-    // Organic idle sway + mouse parallax
+    // Smooth 3D orbit drag damping
+    this.drag.orbitYaw += (this.drag.targetYaw - this.drag.orbitYaw) * 0.08;
+    this.drag.orbitPitch += (this.drag.targetPitch - this.drag.orbitPitch) * 0.08;
+
+    // Organic idle sway + mouse parallax + direct orbit drag
     if (this.slatsGroup) {
-      this.slatsGroup.rotation.y = -0.55 + Math.sin(t * 0.4 * this.params.speed) * 0.12 + this.mouse.x * 0.35;
-      this.slatsGroup.rotation.x = 0.38 + Math.cos(t * 0.3 * this.params.speed) * 0.08 + this.mouse.y * 0.25;
+      this.slatsGroup.rotation.y = -0.55 + Math.sin(t * 0.4 * this.params.speed) * 0.12 + this.mouse.x * 0.35 + this.drag.orbitYaw;
+      this.slatsGroup.rotation.x = 0.38 + Math.cos(t * 0.3 * this.params.speed) * 0.08 + this.mouse.y * 0.25 + this.drag.orbitPitch;
     }
 
     // Update active keystroke pulse waves
