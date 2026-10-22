@@ -14,6 +14,7 @@ import { FeedbackForm } from './components/feedbackForm.js';
 import { FooterContact } from './components/footerContact.js';
 import { FullpageScroll } from './components/fullpageScroll.js';
 import { BootEntrance } from './components/bootEntrance.js';
+import { TextMotion } from './components/textMotion.js';
 import { InteractiveTelemetry } from './components/interactiveTelemetry.js';
 import { InteractiveArchitecture } from './components/interactiveArchitecture.js';
 import { InteractiveWelkinShelf } from './components/interactiveWelkinShelf.js';
@@ -23,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 0. Cinematic Terminal Boot Entrance Animation (简约大气开场入场)
   const bootEntrance = new BootEntrance();
+  const textMotion = new TextMotion();
+  if (import.meta.hot) import.meta.hot.dispose(() => textMotion.destroy());
 
   // 1. Audio Toggle & First Gesture Unlock
   const audioBtn = document.getElementById('audio-toggle-btn');
